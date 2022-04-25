@@ -1,67 +1,70 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { HttpPostLogin } from "../Api/Account";
-import FormManager from "../UI/FormManager";
+import { GlobalContext } from "../Store/Context/GlobalContext";
 
 function Login() {
   interface formValuesInterface {
-    username: string;
-    email: string;
-    password: string;
+    Email: string;
+    Password: string;
   }
 
   let initialValues: formValuesInterface = {
-    username: "",
-    email: "",
-    password: "",
+    Email: "",
+    Password: "",
   };
 
-  function onLoginFormSubmit(formValues: formValuesInterface) {
-    console.log("formvalues....");
-    console.log(formValues);
+  const [loginFV, setLoginFV] = useState(initialValues);
 
-    HttpPostLogin(formValues, (err: Error, result: any) => {
+  const { currentUser, setCurrentUser } = useContext(GlobalContext);
+
+  function onLoginFormSubmit() {
+    console.log("formvalues....");
+    console.log(loginFV);
+
+    HttpPostLogin(loginFV, (err: Error, result: any) => {
       if (err) {
         window.alert(err.message);
       } else {
         console.log("success login");
         console.log(result);
+
+        const { jwtkey, ...cUser } = result;
+
+        localStorage.setItem("user", JSON.stringify(result));
+        setCurrentUser(cUser);
       }
     });
   }
 
   return (
     <div>
-      <FormManager initialValues={initialValues}>
-        {({ values, setValues }: any) => (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              console.log(values);
-              onLoginFormSubmit(values);
-              setValues(initialValues);
-            }}
-          >
-            <input
-              name="Email"
-              placeholder="Email"
-              value={values.Email}
-              type="text"
-              onChange={(e) => {
-                setValues({ ...values, Email: e.target.value });
-              }}
-            />
-            <input
-              name="Password"
-              placeholder="Password"
-              value={values.Password}
-              type="password"
-              onChange={(e) => {
-                setValues({ ...values, Password: e.target.value });
-              }}
-            />
-          </form>
-        )}
-      </FormManager>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onLoginFormSubmit();
+          setLoginFV(initialValues);
+        }}
+      >
+        <input
+          name="Email"
+          placeholder="Email"
+          value={loginFV.Email}
+          type="text"
+          onChange={(e) => {
+            setLoginFV({ ...loginFV, Email: e.target.value });
+          }}
+        />
+        <input
+          name="Password"
+          placeholder="Password"
+          value={loginFV.Password}
+          type="password"
+          onChange={(e) => {
+            setLoginFV({ ...loginFV, Password: e.target.value });
+          }}
+        />
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }

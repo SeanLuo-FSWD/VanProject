@@ -3,7 +3,7 @@ import Routing from "./Routing/Routing";
 import { GlobalContext } from "./Store/Context/GlobalContext";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState("null");
+  const [currentUser, setCurrentUser] = useState(null);
   const [currentMsg, setCurrentMsg] = useState("");
 
   return (
