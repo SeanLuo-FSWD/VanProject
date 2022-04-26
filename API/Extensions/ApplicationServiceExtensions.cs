@@ -1,4 +1,5 @@
 using API.Helpers;
+using API.Repositories;
 
 namespace API.Extensions
 {
@@ -8,7 +9,9 @@ namespace API.Extensions
 
             // services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
 
-            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly); 
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+
+            services.AddScoped<UsersRepository>();
 
             // services.AddDbContext<ApplicationDbContext>(options => {
             //     options.UseSqlite(config.GetConnectionString("DefaultConnection"));
