@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
-import Users from "../Pages/Users";
+import Members from "../Pages/Members";
 import PreLoginRoute from "./PreLoginRoute";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -23,7 +23,7 @@ function Routing() {
           }
         >
           <Route path="/" element={<Home />} />
-          <Route path="users" element={<Users />} />
+          <Route path="users" element={<Members />} />
         </Route>
       </Routes>
     </BrowserRouter>
