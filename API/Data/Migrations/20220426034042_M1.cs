@@ -161,12 +161,12 @@ namespace API.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Age", "City", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "Gender", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "dc07875a-ef62-4f52-9ba5-96f9bf47d61b", 0, 45, "Richmond", "d819e118-f735-43a6-8bb9-a90719cac464", "AppUser", "alice@alice.com", false, "Female", false, null, null, null, "AQAAAAEAACcQAAAAEHqdU+5hDtRbayRZHNdljh4mXNq+uEKddztFtDYi3sQ/iIOxB0y6W8EBFXKqimlbMg==", null, false, "b22ce7bf-bcb0-4440-a635-8f6284611df9", false, "alice" });
+                values: new object[] { "66d6ff70-fdf8-4a22-bdc0-3e90d41f68db", 0, 15, "Vancouver", "aa7f492f-a73e-4782-a007-584f8e80bf56", "AppUser", "bob@bob.com", false, "Male", false, null, null, null, "AQAAAAEAACcQAAAAEBOQ/Kb9oZXul17wFNGiq3P4kxw4+BWTolFgAIka8CUmnEVB8tJhsVJM0AOlJG04PQ==", null, false, "b0eb6ea3-945d-4fbd-8e49-53c87dbcc14c", false, "bob" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Age", "City", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "Gender", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "f04a44ca-b875-463b-9579-f4c02b937a7d", 0, 15, "Vancouver", "5889ec0d-5755-47db-8300-12b10051567f", "AppUser", "bob@bob.com", false, "Male", false, null, null, null, "AQAAAAEAACcQAAAAEDhFLXEvhpoZp/K+o6XnazlVYI/T5g4qbrQeeT+XJZZn7WigN6ivXW/FVDM2s0ctww==", null, false, "916d959b-a529-4b16-81c6-f559fb06b58c", false, "bob" });
+                values: new object[] { "c4d30dc3-55a9-440e-a5e6-2335d0099105", 0, 45, "Richmond", "f0df50fb-6e94-48d2-9aa5-98e2e583e6f2", "AppUser", "alice@alice.com", false, "Female", false, null, null, null, "AQAAAAEAACcQAAAAEJPVGgsQFWSQkpP7BB7MXFAEoRby0OT5qS69daLL2SMWrJt/8qIHE3+H3DwtC9BZFw==", null, false, "7c232451-630b-42f6-bb6f-ed6a1fc60cdf", false, "alice" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

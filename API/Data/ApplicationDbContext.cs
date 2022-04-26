@@ -50,7 +50,7 @@ namespace API.Data
 
             foreach (var item in appUsers)
             {
-                item.PasswordHash = passwordHasher.HashPassword(item, "Pa$$word1");
+                item.PasswordHash = passwordHasher.HashPassword(item, "Pa$$w0rd");
             }
 
             return appUsers;

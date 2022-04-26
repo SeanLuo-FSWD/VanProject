@@ -16,15 +16,12 @@ const HttpPostLogin = (LoginDto: Object, cb: Function) => {
 };
 
 const HttpPostRegister = (RegisterDto: Object, cb: Function) => {
-  console.log("55555555555555555");
-  console.log(RegisterDto);
-
   axios
     .post(`${API_URL}/api/Account/register`, RegisterDto)
     .then((response) => {
       console.log("HttpPostRegister success");
       console.log(response);
-      cb(null, response.data);
+      cb(null);
     })
     .catch((error) => {
       console.log("HttpPostRegister error");

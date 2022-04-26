@@ -40,9 +40,6 @@ function Login() {
   const { setCurrentUser } = useContext(GlobalContext);
 
   function onLoginFormSubmit() {
-    console.log("vvvvvvvvvvvvvvvvvvv");
-    console.log(loginFV);
-
     HttpPostLogin(loginFV, (err: Error, result: IUserDto) => {
       if (err) {
         window.alert(err.message);
@@ -68,7 +65,7 @@ function Login() {
       }
     }
 
-    HttpPostRegister(registerFV, (err: Error, result: IUserDto) => {
+    HttpPostRegister(registerFV, (err: Error) => {
       if (err) {
         window.alert(err.message);
       } else {

@@ -37,24 +37,8 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginObj) {
 
-            Console.WriteLine("login login login login login");
-
-            Console.WriteLine(loginObj.Email);
-            Console.WriteLine(loginObj.Password);
-
             var userObj = await _userManager.Users
                 .SingleOrDefaultAsync(x => x.Email == loginObj.Email.ToLower());
-
-            Console.WriteLine("___________userObj userObj userObj");
-
-            foreach (var property in userObj.GetType().GetProperties())
-            {
-                Console.WriteLine(property.Name); //FirstName
-                Console.WriteLine(property.GetValue(userObj,null)); //Bob
-            }
-
-            Console.WriteLine("userObj userObj userObj____________");
-
 
             if (userObj == null) return Unauthorized("Invalid email");
 
@@ -79,10 +63,7 @@ namespace API.Controllers
 
             if (UserExists) return BadRequest("Email is taken");
 
-            Console.WriteLine("222222222222222");
-            Console.WriteLine(registerDto);
             var user = _mapper.Map<AppUser>(registerDto);  
-            Console.WriteLine(user);
 
             user.Email = registerDto.Email.ToLower();
 
