@@ -24,5 +24,13 @@ namespace API.Repositories
         {
             return await _context.AppUsers.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).ToListAsync();
         }
+
+        public async Task<MemberDto> GetMember(string userId)
+        {
+            return await _context.AppUsers
+                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync(x => x.Id == userId)
+                ;
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace API.Models
 {
     public class AppUser : IdentityUser
     {
+
         // public string UserName { get; set; }
         public int Age { get; set; }
         public string Gender { get; set; }

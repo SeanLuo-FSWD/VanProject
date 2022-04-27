@@ -61,6 +61,9 @@ namespace API.Controllers
 
             var UserExists = await _userManager.Users.AnyAsync(x => x.Email.ToLower() == registerDto.Email.ToLower());
 
+            Console.WriteLine("1111111111111111 UserExists");
+            Console.WriteLine(UserExists);
+
             if (UserExists) return BadRequest("Email is taken");
 
             var user = _mapper.Map<AppUser>(registerDto);  
@@ -69,7 +72,16 @@ namespace API.Controllers
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
-            if (!result.Succeeded) return BadRequest(result.Errors);
+            Console.WriteLine("222222222222222");
+
+            foreach (var item in result.Errors)
+            {
+                Console.WriteLine(item.Description);
+            }
+
+            if (!result.Succeeded) return BadRequest(result.Errors.Last<IdentityError>().Description);
+
+            Console.WriteLine("33333333333333");
 
             return Ok(200);
         }

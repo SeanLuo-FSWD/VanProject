@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { HttpGetMembers } from "../Api/Users";
+import { Link } from "react-router-dom";
+import { HttpGetMembers } from "../Api/Members";
 import { IMember } from "../Interfaces";
 
 function Members() {
@@ -17,7 +18,11 @@ function Members() {
 
   const displayMembers = () => {
     let membersList = Members.map((ele: IMember) => {
-      return <h2 key={ele.id}>{ele.userName}</h2>;
+      return (
+        <Link key={ele.id} to={`/member/${ele.id}`}>
+          <h2>{ele.userName}</h2>
+        </Link>
+      );
     });
 
     return membersList;

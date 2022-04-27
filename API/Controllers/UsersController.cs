@@ -18,12 +18,20 @@ namespace API.Controllers
             _usersRepository = usersRepository;
         }
 
-        [HttpGet("users")]
+        [HttpGet("members")]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetMembers()
         {
-            var users = await _usersRepository.GetMembers();
+            var members = await _usersRepository.GetMembers();
 
-            return Ok(users);
+            return Ok(members);
+        }
+
+        [HttpGet("member/{userId}")]
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetMember(string userId)
+        {
+            var member = await _usersRepository.GetMember(userId);
+
+            return Ok(member);
         }
     }
 }

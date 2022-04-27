@@ -1,5 +1,5 @@
 interface ICurrentUser {
-  UserName: string;
+  userName: string;
 }
 
 interface IMember {
