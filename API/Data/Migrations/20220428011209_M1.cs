@@ -53,6 +53,18 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Chat",
+                columns: table => new
+                {
+                    ChatId = table.Column<string>(type: "TEXT", nullable: false),
+                    type = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Chat", x => x.ChatId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -158,15 +170,117 @@ namespace API.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "Age", "City", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "Gender", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "66d6ff70-fdf8-4a22-bdc0-3e90d41f68db", 0, 15, "Vancouver", "aa7f492f-a73e-4782-a007-584f8e80bf56", "AppUser", "bob@bob.com", false, "Male", false, null, null, null, "AQAAAAEAACcQAAAAEBOQ/Kb9oZXul17wFNGiq3P4kxw4+BWTolFgAIka8CUmnEVB8tJhsVJM0AOlJG04PQ==", null, false, "b0eb6ea3-945d-4fbd-8e49-53c87dbcc14c", false, "bob" });
+            migrationBuilder.CreateTable(
+                name: "Chat_AppUser",
+                columns: table => new
+                {
+                    Chat_AppUserId = table.Column<string>(type: "TEXT", nullable: false),
+                    ChatId = table.Column<string>(type: "TEXT", nullable: false),
+                    AppUserId = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Chat_AppUser", x => x.Chat_AppUserId);
+                    table.ForeignKey(
+                        name: "FK_Chat_AppUser_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Chat_AppUser_Chat_ChatId",
+                        column: x => x.ChatId,
+                        principalTable: "Chat",
+                        principalColumn: "ChatId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Message",
+                columns: table => new
+                {
+                    MessageId = table.Column<string>(type: "TEXT", nullable: false),
+                    content = table.Column<string>(type: "TEXT", nullable: false),
+                    messageSent = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ChatId = table.Column<string>(type: "TEXT", nullable: false),
+                    AppUserId = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Message", x => x.MessageId);
+                    table.ForeignKey(
+                        name: "FK_Message_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Message_Chat_ChatId",
+                        column: x => x.ChatId,
+                        principalTable: "Chat",
+                        principalColumn: "ChatId",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Age", "City", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "Gender", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "c4d30dc3-55a9-440e-a5e6-2335d0099105", 0, 45, "Richmond", "f0df50fb-6e94-48d2-9aa5-98e2e583e6f2", "AppUser", "alice@alice.com", false, "Female", false, null, null, null, "AQAAAAEAACcQAAAAEJPVGgsQFWSQkpP7BB7MXFAEoRby0OT5qS69daLL2SMWrJt/8qIHE3+H3DwtC9BZFw==", null, false, "7c232451-630b-42f6-bb6f-ed6a1fc60cdf", false, "alice" });
+                values: new object[] { "alice_id", 0, 45, "Richmond", "44b5c44d-55ae-4581-8f97-456366c91738", "AppUser", "alice@alice.com", false, "Female", false, null, null, null, "AQAAAAEAACcQAAAAEK5W3AcEcoERhmu93R5Pd+gHigt6RV53ceirR19dsrnjwdCx9cJKzz+ac+q6UdOEwQ==", null, false, "e2559228-5f1a-4ab9-980b-0524b9684e8e", false, "alice" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "Age", "City", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "Gender", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "bob_id", 0, 25, "Vancouver", "aa7dde4c-669d-4413-aa83-2d0359517d0f", "AppUser", "bob@bob.com", false, "Male", false, null, null, null, "AQAAAAEAACcQAAAAEBZYgpMWUcw5VCqUjqq2o8Fp7B2N0LDX65MGcUkBzyF6gg+XUvmSByt8fhaF0SuFiw==", null, false, "94b177df-d466-4967-a1a4-af49e70b4147", false, "bob" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "Age", "City", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "Gender", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "cindy_id", 0, 40, "Burnaby", "307b1cc4-e6fe-4dc6-952f-6270bfd34d7d", "AppUser", "cindy@cindy.com", false, "Female", false, null, null, null, "AQAAAAEAACcQAAAAEOtjlETOHPZL09modwMO9hhcz+cz57iEho+cp5SIzGMB9GtBnGNWELmuc914KBK3qw==", null, false, "8ea96c1e-1b68-4007-927c-79675bdafe23", false, "cindy" });
+
+            migrationBuilder.InsertData(
+                table: "Chat",
+                columns: new[] { "ChatId", "type" },
+                values: new object[] { "alice_bob_id_1", "private" });
+
+            migrationBuilder.InsertData(
+                table: "Chat",
+                columns: new[] { "ChatId", "type" },
+                values: new object[] { "alice_cindy_id_1", "private" });
+
+            migrationBuilder.InsertData(
+                table: "Chat_AppUser",
+                columns: new[] { "Chat_AppUserId", "AppUserId", "ChatId" },
+                values: new object[] { "Chat_AppUserId_1", "bob_id", "alice_bob_id_1" });
+
+            migrationBuilder.InsertData(
+                table: "Chat_AppUser",
+                columns: new[] { "Chat_AppUserId", "AppUserId", "ChatId" },
+                values: new object[] { "Chat_AppUserId_2", "alice_id", "alice_bob_id_1" });
+
+            migrationBuilder.InsertData(
+                table: "Chat_AppUser",
+                columns: new[] { "Chat_AppUserId", "AppUserId", "ChatId" },
+                values: new object[] { "Chat_AppUserId_3", "cindy_id", "alice_cindy_id_1" });
+
+            migrationBuilder.InsertData(
+                table: "Chat_AppUser",
+                columns: new[] { "Chat_AppUserId", "AppUserId", "ChatId" },
+                values: new object[] { "Chat_AppUserId_4", "alice_id", "alice_cindy_id_1" });
+
+            migrationBuilder.InsertData(
+                table: "Message",
+                columns: new[] { "MessageId", "AppUserId", "ChatId", "content", "messageSent" },
+                values: new object[] { "Message_1", "alice_id", "alice_bob_id_1", "Hi Bob, how are you?", new DateTime(2022, 4, 28, 1, 12, 9, 464, DateTimeKind.Utc).AddTicks(9020) });
+
+            migrationBuilder.InsertData(
+                table: "Message",
+                columns: new[] { "MessageId", "AppUserId", "ChatId", "content", "messageSent" },
+                values: new object[] { "Message_2", "bob_id", "alice_bob_id_1", "Hi Alice, I am fine, thanks", new DateTime(2022, 4, 28, 1, 12, 9, 464, DateTimeKind.Utc).AddTicks(9030) });
+
+            migrationBuilder.InsertData(
+                table: "Message",
+                columns: new[] { "MessageId", "AppUserId", "ChatId", "content", "messageSent" },
+                values: new object[] { "Message_3", "alice_id", "alice_cindy_id_1", "hi cindy this is alice", new DateTime(2022, 4, 28, 1, 12, 9, 464, DateTimeKind.Utc).AddTicks(9030) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -204,6 +318,26 @@ namespace API.Data.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Chat_AppUser_AppUserId",
+                table: "Chat_AppUser",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Chat_AppUser_ChatId",
+                table: "Chat_AppUser",
+                column: "ChatId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Message_AppUserId",
+                table: "Message",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Message_ChatId",
+                table: "Message",
+                column: "ChatId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -224,10 +358,19 @@ namespace API.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Chat_AppUser");
+
+            migrationBuilder.DropTable(
+                name: "Message");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Chat");
         }
     }
 }

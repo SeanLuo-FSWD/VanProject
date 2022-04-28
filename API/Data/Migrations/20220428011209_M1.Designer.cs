@@ -11,13 +11,142 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220426034042_M1")]
+    [Migration("20220428011209_M1")]
     partial class M1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.4");
+
+            modelBuilder.Entity("API.Models.Chat", b =>
+                {
+                    b.Property<string>("ChatId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("type")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ChatId");
+
+                    b.ToTable("Chat");
+
+                    b.HasData(
+                        new
+                        {
+                            ChatId = "alice_bob_id_1",
+                            type = "private"
+                        },
+                        new
+                        {
+                            ChatId = "alice_cindy_id_1",
+                            type = "private"
+                        });
+                });
+
+            modelBuilder.Entity("API.Models.Chat_AppUser", b =>
+                {
+                    b.Property<string>("Chat_AppUserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ChatId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Chat_AppUserId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("ChatId");
+
+                    b.ToTable("Chat_AppUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Chat_AppUserId = "Chat_AppUserId_1",
+                            AppUserId = "bob_id",
+                            ChatId = "alice_bob_id_1"
+                        },
+                        new
+                        {
+                            Chat_AppUserId = "Chat_AppUserId_2",
+                            AppUserId = "alice_id",
+                            ChatId = "alice_bob_id_1"
+                        },
+                        new
+                        {
+                            Chat_AppUserId = "Chat_AppUserId_3",
+                            AppUserId = "cindy_id",
+                            ChatId = "alice_cindy_id_1"
+                        },
+                        new
+                        {
+                            Chat_AppUserId = "Chat_AppUserId_4",
+                            AppUserId = "alice_id",
+                            ChatId = "alice_cindy_id_1"
+                        });
+                });
+
+            modelBuilder.Entity("API.Models.Message", b =>
+                {
+                    b.Property<string>("MessageId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ChatId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("content")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("messageSent")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("MessageId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("ChatId");
+
+                    b.ToTable("Message");
+
+                    b.HasData(
+                        new
+                        {
+                            MessageId = "Message_1",
+                            AppUserId = "alice_id",
+                            ChatId = "alice_bob_id_1",
+                            content = "Hi Bob, how are you?",
+                            messageSent = new DateTime(2022, 4, 28, 1, 12, 9, 464, DateTimeKind.Utc).AddTicks(9020)
+                        },
+                        new
+                        {
+                            MessageId = "Message_2",
+                            AppUserId = "bob_id",
+                            ChatId = "alice_bob_id_1",
+                            content = "Hi Alice, I am fine, thanks",
+                            messageSent = new DateTime(2022, 4, 28, 1, 12, 9, 464, DateTimeKind.Utc).AddTicks(9030)
+                        },
+                        new
+                        {
+                            MessageId = "Message_3",
+                            AppUserId = "alice_id",
+                            ChatId = "alice_cindy_id_1",
+                            content = "hi cindy this is alice",
+                            messageSent = new DateTime(2022, 4, 28, 1, 12, 9, 464, DateTimeKind.Utc).AddTicks(9030)
+                        });
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -237,38 +366,93 @@ namespace API.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "66d6ff70-fdf8-4a22-bdc0-3e90d41f68db",
+                            Id = "bob_id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "aa7f492f-a73e-4782-a007-584f8e80bf56",
+                            ConcurrencyStamp = "aa7dde4c-669d-4413-aa83-2d0359517d0f",
                             Email = "bob@bob.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEBOQ/Kb9oZXul17wFNGiq3P4kxw4+BWTolFgAIka8CUmnEVB8tJhsVJM0AOlJG04PQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBZYgpMWUcw5VCqUjqq2o8Fp7B2N0LDX65MGcUkBzyF6gg+XUvmSByt8fhaF0SuFiw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b0eb6ea3-945d-4fbd-8e49-53c87dbcc14c",
+                            SecurityStamp = "94b177df-d466-4967-a1a4-af49e70b4147",
                             TwoFactorEnabled = false,
                             UserName = "bob",
-                            Age = 15,
+                            Age = 25,
                             City = "Vancouver",
                             Gender = "Male"
                         },
                         new
                         {
-                            Id = "c4d30dc3-55a9-440e-a5e6-2335d0099105",
+                            Id = "alice_id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f0df50fb-6e94-48d2-9aa5-98e2e583e6f2",
+                            ConcurrencyStamp = "44b5c44d-55ae-4581-8f97-456366c91738",
                             Email = "alice@alice.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEJPVGgsQFWSQkpP7BB7MXFAEoRby0OT5qS69daLL2SMWrJt/8qIHE3+H3DwtC9BZFw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK5W3AcEcoERhmu93R5Pd+gHigt6RV53ceirR19dsrnjwdCx9cJKzz+ac+q6UdOEwQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7c232451-630b-42f6-bb6f-ed6a1fc60cdf",
+                            SecurityStamp = "e2559228-5f1a-4ab9-980b-0524b9684e8e",
                             TwoFactorEnabled = false,
                             UserName = "alice",
                             Age = 45,
                             City = "Richmond",
                             Gender = "Female"
+                        },
+                        new
+                        {
+                            Id = "cindy_id",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "307b1cc4-e6fe-4dc6-952f-6270bfd34d7d",
+                            Email = "cindy@cindy.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEOtjlETOHPZL09modwMO9hhcz+cz57iEho+cp5SIzGMB9GtBnGNWELmuc914KBK3qw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "8ea96c1e-1b68-4007-927c-79675bdafe23",
+                            TwoFactorEnabled = false,
+                            UserName = "cindy",
+                            Age = 40,
+                            City = "Burnaby",
+                            Gender = "Female"
                         });
+                });
+
+            modelBuilder.Entity("API.Models.Chat_AppUser", b =>
+                {
+                    b.HasOne("API.Models.AppUser", "appUser")
+                        .WithMany("chat_AppUsers")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Models.Chat", "chat")
+                        .WithMany("chat_AppUsers")
+                        .HasForeignKey("ChatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("appUser");
+
+                    b.Navigation("chat");
+                });
+
+            modelBuilder.Entity("API.Models.Message", b =>
+                {
+                    b.HasOne("API.Models.AppUser", "appUser")
+                        .WithMany("messages")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Models.Chat", "chat")
+                        .WithMany("messages")
+                        .HasForeignKey("ChatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("appUser");
+
+                    b.Navigation("chat");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -320,6 +504,20 @@ namespace API.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("API.Models.Chat", b =>
+                {
+                    b.Navigation("chat_AppUsers");
+
+                    b.Navigation("messages");
+                });
+
+            modelBuilder.Entity("API.Models.AppUser", b =>
+                {
+                    b.Navigation("chat_AppUsers");
+
+                    b.Navigation("messages");
                 });
 #pragma warning restore 612, 618
         }
