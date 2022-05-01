@@ -1,3 +1,4 @@
 const API_URL = "https://localhost:7277/api";
+const HUB_URL = "https://localhost:7277/hub";
 
-export default API_URL;
+export { API_URL, HUB_URL };

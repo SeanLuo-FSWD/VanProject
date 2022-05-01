@@ -14,6 +14,10 @@ namespace API.Helpers
         {
             CreateMap<AppUser, MemberDto>();
             CreateMap<RegisterDto, AppUser>();
+            CreateMap<Chat_AppUser, Chat_AppUserDto>();
+            CreateMap<Chat_AppUserDto, Chat_AppUser>();
+            CreateMap<Chat, ChatDto>();
+            CreateMap<ChatDto, Chat>();
         }
     }
 }

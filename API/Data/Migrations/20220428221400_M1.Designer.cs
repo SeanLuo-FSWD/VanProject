@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220428011209_M1")]
+    [Migration("20220428221400_M1")]
     partial class M1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,7 +30,7 @@ namespace API.Data.Migrations
 
                     b.HasKey("ChatId");
 
-                    b.ToTable("Chat");
+                    b.ToTable("Chats");
 
                     b.HasData(
                         new
@@ -64,7 +64,7 @@ namespace API.Data.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.ToTable("Chat_AppUser");
+                    b.ToTable("Chat_AppUsers");
 
                     b.HasData(
                         new
@@ -119,7 +119,7 @@ namespace API.Data.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.ToTable("Message");
+                    b.ToTable("Messages");
 
                     b.HasData(
                         new
@@ -128,7 +128,7 @@ namespace API.Data.Migrations
                             AppUserId = "alice_id",
                             ChatId = "alice_bob_id_1",
                             content = "Hi Bob, how are you?",
-                            messageSent = new DateTime(2022, 4, 28, 1, 12, 9, 464, DateTimeKind.Utc).AddTicks(9020)
+                            messageSent = new DateTime(2022, 4, 28, 22, 13, 59, 844, DateTimeKind.Utc).AddTicks(2450)
                         },
                         new
                         {
@@ -136,7 +136,7 @@ namespace API.Data.Migrations
                             AppUserId = "bob_id",
                             ChatId = "alice_bob_id_1",
                             content = "Hi Alice, I am fine, thanks",
-                            messageSent = new DateTime(2022, 4, 28, 1, 12, 9, 464, DateTimeKind.Utc).AddTicks(9030)
+                            messageSent = new DateTime(2022, 4, 28, 22, 13, 59, 844, DateTimeKind.Utc).AddTicks(2460)
                         },
                         new
                         {
@@ -144,7 +144,7 @@ namespace API.Data.Migrations
                             AppUserId = "alice_id",
                             ChatId = "alice_cindy_id_1",
                             content = "hi cindy this is alice",
-                            messageSent = new DateTime(2022, 4, 28, 1, 12, 9, 464, DateTimeKind.Utc).AddTicks(9030)
+                            messageSent = new DateTime(2022, 4, 28, 22, 13, 59, 844, DateTimeKind.Utc).AddTicks(2460)
                         });
                 });
 
@@ -368,13 +368,13 @@ namespace API.Data.Migrations
                         {
                             Id = "bob_id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "aa7dde4c-669d-4413-aa83-2d0359517d0f",
+                            ConcurrencyStamp = "373592ec-ab9e-4cf4-9caf-40b6d7bd0f71",
                             Email = "bob@bob.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEBZYgpMWUcw5VCqUjqq2o8Fp7B2N0LDX65MGcUkBzyF6gg+XUvmSByt8fhaF0SuFiw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMlwxrDhEgib5OYIbi9QqO+w77lGH0gvZfpejxbcfYaMrzScQBvgoHXargSJooscGg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "94b177df-d466-4967-a1a4-af49e70b4147",
+                            SecurityStamp = "42d1732c-2938-475b-9ce9-cbd91580322f",
                             TwoFactorEnabled = false,
                             UserName = "bob",
                             Age = 25,
@@ -385,13 +385,13 @@ namespace API.Data.Migrations
                         {
                             Id = "alice_id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "44b5c44d-55ae-4581-8f97-456366c91738",
+                            ConcurrencyStamp = "54f8b86c-43c2-433d-a9ab-cd02183d3c9b",
                             Email = "alice@alice.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEK5W3AcEcoERhmu93R5Pd+gHigt6RV53ceirR19dsrnjwdCx9cJKzz+ac+q6UdOEwQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPeL0gpu2nyOMfbBaQTnpO6bIxafJo8unDQaRxqeTXRhFBTijYcVe+9JtxG8kjJC8g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e2559228-5f1a-4ab9-980b-0524b9684e8e",
+                            SecurityStamp = "8099d0e0-3ba3-46a8-b2b4-335080559809",
                             TwoFactorEnabled = false,
                             UserName = "alice",
                             Age = 45,
@@ -402,13 +402,13 @@ namespace API.Data.Migrations
                         {
                             Id = "cindy_id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "307b1cc4-e6fe-4dc6-952f-6270bfd34d7d",
+                            ConcurrencyStamp = "0b1b6619-f50e-4465-a8c6-1247c92925d0",
                             Email = "cindy@cindy.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEOtjlETOHPZL09modwMO9hhcz+cz57iEho+cp5SIzGMB9GtBnGNWELmuc914KBK3qw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFZ+aRb+yRfjesgFDkdONPw/sGg9WElf9auCqA3wBRbV8/ic2POeBSbMoqncv0IWmg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8ea96c1e-1b68-4007-927c-79675bdafe23",
+                            SecurityStamp = "be87c142-097b-4eab-a1be-2c7e3891f5cd",
                             TwoFactorEnabled = false,
                             UserName = "cindy",
                             Age = 40,

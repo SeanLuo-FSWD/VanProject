@@ -25,21 +25,7 @@ builder.Services.AddCors();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddIdentityCore<AppUser>(opt => 
-{
-    opt.Password.RequireNonAlphanumeric = false;
-})
-.AddSignInManager<SignInManager<AppUser>>()
-.AddEntityFrameworkStores<ApplicationDbContext>();
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
-    options.TokenValidationParameters = new TokenValidationParameters {
-        ValidateIssuerSigningKey = true, 
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtKey"])),
-        ValidateIssuer = false, 
-        ValidateAudience = false, 
-    };
-});
+builder.Services.AddIdentityServices(Configuration);
 
 var app = builder.Build();
 

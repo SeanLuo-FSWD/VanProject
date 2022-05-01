@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { HttpPostLogin, HttpPostRegister } from "../Api/Account";
-import { IUserDto } from "../Interfaces";
+import { ICurrentUser, IUserDto } from "../Interfaces";
 import { GlobalContext } from "../Store/Context/GlobalContext";
 
 function Login() {
@@ -40,7 +40,7 @@ function Login() {
   const { setCurrentUser } = useContext(GlobalContext);
 
   function onLoginFormSubmit() {
-    HttpPostLogin(loginFV, (err: Error, result: IUserDto) => {
+    HttpPostLogin(loginFV, (err: Error, result: ICurrentUser) => {
       if (err) {
         window.alert(err.message);
       } else {
@@ -49,9 +49,9 @@ function Login() {
 
         localStorage.setItem("user", JSON.stringify(result));
 
-        const { jwtkey, ...cUser } = result;
+        // const { jwtToken, ...cUser } = result;
 
-        setCurrentUser(cUser);
+        setCurrentUser(result);
         setLoginFV(initialLoginFormValues);
       }
     });

@@ -27,6 +27,7 @@ namespace API.Repositories
 
         public async Task<MemberDto> GetMember(string userId)
         {
+            var dafasd = _context.AppUsers;
             return await _context.AppUsers
                 .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync(x => x.Id == userId)

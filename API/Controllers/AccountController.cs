@@ -49,7 +49,8 @@ namespace API.Controllers
 
             var userDto = new UserDto {
                 UserName = userObj.UserName,
-                Token = await GenerateJwt(userObj),
+                id = userObj.Id,
+                jwtToken = await GenerateJwt(userObj),
             };
 
             return userDto;

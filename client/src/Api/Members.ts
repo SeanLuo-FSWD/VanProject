@@ -1,4 +1,4 @@
-import API_URL from "../Config/constant";
+import { API_URL } from "../Config/constant";
 import axios from "axios";
 import api from "./axios";
 
@@ -8,9 +8,6 @@ const HttpGetMembers = async (cb: Function) => {
       method: "get",
       url: "/Users/members",
     });
-
-    console.log("response HttpGetMembers");
-    console.log(response);
 
     cb(null, response.data);
   } catch (error) {
@@ -25,9 +22,6 @@ const HttpGetMember = async (id: String, cb: Function) => {
       method: "get",
       url: `/Users/member/${id}`,
     });
-
-    console.log("response HttpGetMember");
-    console.log(response);
 
     cb(null, response.data);
   } catch (error) {

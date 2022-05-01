@@ -28,7 +28,7 @@ function Member() {
           <p>Age: {Member.age}</p>
           <p>City: {Member.city}</p>
           <p>Gender: {Member.gender}</p>
-          <Link to="/chat">
+          <Link to={`/chat?user=${Member.id}`}>
             <button>Chat</button>
           </Link>
         </div>

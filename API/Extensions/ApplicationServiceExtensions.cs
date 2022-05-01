@@ -12,6 +12,9 @@ namespace API.Extensions
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 
             services.AddScoped<UsersRepository>();
+            services.AddScoped<ChatRepository>();
+            services.AddScoped<MessageRepository>();
+
 
             // services.AddDbContext<ApplicationDbContext>(options => {
             //     options.UseSqlite(config.GetConnectionString("DefaultConnection"));

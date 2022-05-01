@@ -1,5 +1,7 @@
 interface ICurrentUser {
   userName: string;
+  jwtToken: string;
+  id: string;
 }
 
 interface IMember {
@@ -12,7 +14,7 @@ interface IMember {
 
 interface IUserDto {
   UserName: string;
-  jwtkey: boolean;
+  jwtToken: boolean;
 }
 
 export type { IUserDto, ICurrentUser, IMember };

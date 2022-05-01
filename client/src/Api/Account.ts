@@ -1,4 +1,4 @@
-import API_URL from "../Config/constant";
+import { API_URL } from "../Config/constant";
 import axios from "axios";
 import api from "./axios";
 
